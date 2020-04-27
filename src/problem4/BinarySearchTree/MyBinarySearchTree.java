@@ -1,21 +1,20 @@
-/*
- *  Created by IntelliJ IDEA.
- *  User: Vaibhav
- *  Date: 23-Mar-20
- *  Time: 7:17 PM
- */
-package problem1.mybst;
-// to implement BinarySearchTree
+package problem4.BinarySearchTree;
 
-import problem1.node.TreeNode;
-import problem1.node.TreeNode;
-
-// to implement BinarySearchTree
+import problem4.Node.MyNode;
+import problem4.myqueue.MyQueue;
 public class MyBinarySearchTree {
-    public TreeNode root;
+    public problem1.node.TreeNode root;
+    private MyQueue myqueue;
+    public problem1.node.TreeNode getRoot(){
+        return root;
+    }
 
-    public MyBinarySearchTree insert(int value) {
-        TreeNode node = new TreeNode(value);
+    public MyBinarySearchTree(MyQueue myqueue) {
+        this.myqueue = myqueue;
+    }
+
+    public problem4.BinarySearchTree.MyBinarySearchTree insert(int value) {
+        problem1.node.TreeNode node = new problem1.node.TreeNode(value);
         if (root == null) {
             root = node;
             return this;
@@ -24,7 +23,7 @@ public class MyBinarySearchTree {
         return this;
     }
 
-    private void insertRec(TreeNode latestRoot, TreeNode node) {
+    private void insertRec(problem1.node.TreeNode latestRoot, problem1.node.TreeNode node) {
         if (latestRoot.value > node.value) {
             if (latestRoot.left == null) {
                 latestRoot.left = node;
@@ -47,7 +46,7 @@ public class MyBinarySearchTree {
         System.out.println("");
     }
 
-    private void printInOrderRec(TreeNode currRoot) {
+    private void printInOrderRec(problem1.node.TreeNode currRoot) {
 
         if (currRoot == null) {
             return;
@@ -59,14 +58,14 @@ public class MyBinarySearchTree {
 
     public void printPreorder() {
         printPreOrderRec(root);
-        System.out.println("");
+        System.out.println(" ");
     }
 
-    private void printPreOrderRec(TreeNode currRoot) {
+    private void printPreOrderRec(problem1.node.TreeNode currRoot) {
         if (currRoot == null) {
             return;
         }
-        System.out.print(currRoot.value + "  ");
+        myqueue.enqueue(currRoot.value);
         printPreOrderRec(currRoot.left);
         printPreOrderRec(currRoot.right);
     }
@@ -76,7 +75,7 @@ public class MyBinarySearchTree {
         System.out.println("");
     }
 
-    private void printPostOrderRec(TreeNode currRoot) {
+    private void printPostOrderRec(problem1.node.TreeNode currRoot) {
         if (currRoot == null) {
             return;
         }
@@ -94,35 +93,4 @@ public class MyBinarySearchTree {
     public void setCountrr(int countrr) {
         this.countrr = countrr;
     }
-    public void printLeft() {
-        printLeftHelp(root);
-        System.out.println("");
-    }
-    private void printLeftHelp(TreeNode currRoot) {
-        if (currRoot == null) {
-            return;
-        }
-        System.out.print(currRoot.value + "  ");
-        printLeftHelp(currRoot.left);
-    }
-    public int notChildCounter(){
-        int counter1 = 0;
-        int counter2 = 0;
-        TreeNode current = root;
-        while (current != null){
-            if(current.left == null){
-                counter1++;
-            }
-            current = current.left;
-        }
-        current = root;
-        while (current != null){
-            if(current.left == null){
-                counter2++;
-            }
-            current = current.right;
-        }
-        return counter1 + counter2;
-    }
-
 }
